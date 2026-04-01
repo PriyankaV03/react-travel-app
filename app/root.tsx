@@ -7,6 +7,13 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import "@syncfusion/ej2-base/styles/material.css";
+import "@syncfusion/ej2-react-buttons/styles/material.css";
+import "@syncfusion/ej2-react-grids/styles/material.css";
+import "@syncfusion/ej2-react-navigations/styles/material.css";
+import "@syncfusion/ej2-react-splitbuttons/styles/material.css";
+import "@syncfusion/ej2-react-dropdowns/styles/material.css";
+
 import type { Route } from "./+types/root";
 import "./app.css";
 
