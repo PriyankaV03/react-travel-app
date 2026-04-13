@@ -16,7 +16,7 @@ export default function MobileSidebar() {
                         src="/assets/icons/logo.svg"
                         alt="Logo"
                         className="size-[30px]" />
-                    <h1>Travel Data Visualization</h1>
+                    <h1>Travel Visualization Hub</h1>
                 </Link>
 
                 <button 
