@@ -1,6 +1,5 @@
-# Stage 1 — Build the React app
+# Stage 1 — Build the React Router v7 SSR app
 FROM node:20-alpine AS build
-
 WORKDIR /app
 
 COPY package*.json ./
@@ -9,22 +8,22 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# Stage 2 — Production server
+# Stage 2 — Production runtime
 FROM node:20-alpine
-
 WORKDIR /app
 
-# Copy necessary files from the build stage
-COPY --from=build /app/package*.json ./
-COPY --from=build /app/build ./build
-
-# Install ONLY production dependencies to keep the image small
+# Copy package files and install ONLY production deps
+COPY package*.json ./
 RUN npm ci --omit=dev
 
-# The server listens on port 3000 by default in React Router v7
+# Copy the built SSR server + client assets
+COPY --from=build /app/build ./build
+
+# Cloud Run requires your server to listen on PORT
+ENV NODE_ENV=production
+ENV PORT=8080
+
 EXPOSE 8080
 
-ENV NODE_ENV=production
-
-# Start the application server
+# Start the React Router SSR server
 CMD ["npm", "run", "start"]
