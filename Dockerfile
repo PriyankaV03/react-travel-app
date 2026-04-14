@@ -22,7 +22,7 @@ COPY --from=build /app/build ./build
 RUN npm ci --omit=dev
 
 # The server listens on port 3000 by default in React Router v7
-EXPOSE 3000
+EXPOSE 8080
 
 ENV NODE_ENV=production
 
