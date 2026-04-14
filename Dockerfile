@@ -6,6 +6,9 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
+ENV SENTRY_DISABLE_AUTO_UPLOAD=1
+
 RUN npm run build
 
 # Stage 2 — Production runtime
