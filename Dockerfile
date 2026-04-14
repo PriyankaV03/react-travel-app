@@ -1,5 +1,5 @@
 # Stage 1 — Build the React app
-FROM node:20.20.2-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -9,11 +9,22 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# Stage 2 — Serve with Nginx
-FROM nginx:1.25-alpine
+# Stage 2 — Production server
+FROM node:20-alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 8080
+# Copy necessary files from the build stage
+COPY --from=build /app/package*.json ./
+COPY --from=build /app/build ./build
 
-CMD ["nginx", "-g", "daemon off;"]
+# Install ONLY production dependencies to keep the image small
+RUN npm ci --omit=dev
+
+# The server listens on port 3000 by default in React Router v7
+EXPOSE 3000
+
+ENV NODE_ENV=production
+
+# Start the application server
+CMD ["npm", "run", "start"]
