@@ -52,7 +52,7 @@ To build and run using Docker:
 docker build -t my-app .
 
 # Run the container
-docker run -p 3000:3000 my-app
+docker run -p 8080:8080 my-app
 ```
 
 The containerized application can be deployed to any platform that supports Docker, including:
@@ -80,7 +80,8 @@ Make sure to deploy the output of `npm run build`
 
 ## Styling
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting
+experience. You can use whatever CSS framework you prefer.
 
 ---
 
